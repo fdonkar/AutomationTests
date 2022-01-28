@@ -21,6 +21,9 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//a[@id='proceed-link']")
     public WebElement proceedButton;
 
+    @FindBy(xpath = "//div[@class='alert alert-error']")
+    public WebElement warningMessage;
+
     public void login(String username, String password){
 
         usernameInput.sendKeys(username);
