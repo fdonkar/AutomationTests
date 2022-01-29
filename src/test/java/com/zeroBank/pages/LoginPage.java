@@ -25,7 +25,7 @@ public class LoginPage extends BasePage{
     public WebElement warningMessage;
 
     public void login(String username, String password){
-
+        signInButton.click();
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(password);
         signIn.click();
@@ -34,10 +34,19 @@ public class LoginPage extends BasePage{
     }
 
     public void login(){
+        signInButton.click();
         usernameInput.sendKeys(ConfigurationReader.get("username"));
         passwordInput.sendKeys(ConfigurationReader.get("password"));
         signIn.click();
         advancedButton.click();
         proceedButton.click();
+    }
+
+    public void loginWithInvalidCredentials(String username, String password){
+        signInButton.click();
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        signIn.click();
+
     }
 }
