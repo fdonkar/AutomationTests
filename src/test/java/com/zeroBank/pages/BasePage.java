@@ -14,4 +14,11 @@ public abstract class BasePage {
     @FindBy(xpath = "//button[@id='signin_button']")
     public WebElement signInButton;
 
+    @FindBy(css = "#account_summary_tab")
+    public WebElement accountSummary;
+
+    @FindBy(css = "#account_activity_tab")
+    public WebElement accountActivity;
+
+
 }
