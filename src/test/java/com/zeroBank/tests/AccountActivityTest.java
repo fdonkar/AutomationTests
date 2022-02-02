@@ -2,9 +2,15 @@ package com.zeroBank.tests;
 
 import com.zeroBank.pages.AccountActivityPage;
 import com.zeroBank.pages.LoginPage;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class AccountActivityTest extends TestBase{
 
@@ -25,5 +31,23 @@ public class AccountActivityTest extends TestBase{
         Select accountSelect = new Select(accountActivityPage.accountDropdown);
         Assert.assertEquals(accountSelect.getFirstSelectedOption().getText(),"Savings",
                 "Default option NOT Savings");
+    }
+
+    @Test
+    public void accountDropdownAllOptionsTest(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.login();
+        loginPage.accountActivity.click();
+        AccountActivityPage accountActivityPage = new AccountActivityPage();
+        Select accountSelect = new Select(accountActivityPage.accountDropdown);
+
+        List<WebElement> options = accountSelect.getOptions();
+        List<String> actualResult = new ArrayList<>();
+        for (WebElement option : options) {
+            actualResult.add(option.getText());
+        }
+
+        List<String> expectedResult = Arrays.asList("Savings", "Checking","Savings", "Loan", "Credit Card", "Brokerage");
+        Assert.assertEquals(actualResult,expectedResult,"All select options NOT matched");
     }
 }
