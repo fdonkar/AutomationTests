@@ -42,12 +42,21 @@ public class AccountActivityTest extends TestBase{
         Select accountSelect = new Select(accountActivityPage.accountDropdown);
 
         List<WebElement> options = accountSelect.getOptions();
-        List<String> actualResult = new ArrayList<>();
-        for (WebElement option : options) {
-            actualResult.add(option.getText());
-        }
-
+        List<String> actualResult = accountActivityPage.getWebElementsText(options);
         List<String> expectedResult = Arrays.asList("Savings", "Checking","Savings", "Loan", "Credit Card", "Brokerage");
         Assert.assertEquals(actualResult,expectedResult,"All select options NOT matched");
+    }
+
+    @Test
+    public void transactionsTableTest(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.login();
+        loginPage.accountActivity.click();
+        AccountActivityPage accountActivityPage = new AccountActivityPage();
+
+        List<String> expectedResult = Arrays.asList("Date", "Description", "Deposit", "Withdrawal");
+        List<String> actualResult = accountActivityPage.getWebElementsText(accountActivityPage.transactionsTable);
+
+        Assert.assertEquals(actualResult,expectedResult,"Transactions Table's column names NOT matched");
     }
 }
